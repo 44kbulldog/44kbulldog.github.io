@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Delon - Developer Portfolio</title>
+    <title>Delon - Software Developer</title>
 
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            background: #0b1220;
+            font-family: Arial, sans-serif;
+            background: #0a0f1f;
             color: white;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 40px auto;
-            padding: 30px;
+            padding: 20px;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            padding: 40px 20px;
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 40px;
             margin-bottom: 5px;
+            animation: fadeIn 1s ease-in;
         }
 
         h2 {
@@ -32,17 +33,20 @@
             margin-top: 0;
         }
 
-        .card {
-            background: #111827;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 10px;
+        .section {
+            margin-top: 40px;
         }
 
-        .repo {
-            border-left: 3px solid #38bdf8;
-            padding-left: 10px;
-            margin-bottom: 10px;
+        .card {
+            background: #111827;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
         }
 
         a {
@@ -50,17 +54,35 @@
             text-decoration: none;
         }
 
-        button {
-            padding: 10px 15px;
+        .button {
+            display: inline-block;
+            padding: 12px 18px;
             background: #38bdf8;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
+            color: black;
+            border-radius: 8px;
+            font-weight: bold;
             margin-top: 10px;
         }
 
-        button:hover {
+        .button:hover {
             background: #0ea5e9;
+        }
+
+        .hire {
+            text-align: center;
+            padding: 30px;
+            background: #111827;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        ul {
+            padding-left: 20px;
         }
     </style>
 </head>
@@ -72,35 +94,60 @@
     <div class="header">
         <h1>Delon</h1>
         <h2>Software Developer | Python | AI Enthusiast</h2>
-        <p>Building real-world software and AI solutions.</p>
+        <p>Building real-world software and AI-powered solutions.</p>
+
+        <a class="button" href="https://github.com/44kbulldog" target="_blank">
+            View GitHub
+        </a>
+
+        <a class="button" href="resume.pdf" download>
+            Download CV
+        </a>
     </div>
 
-    <div class="card">
-        <h3>🚀 My GitHub Projects</h3>
-        <div id="repos">Loading projects...</div>
+    <div class="section">
+        <h3>🚀 Projects</h3>
+
+        <div class="card">
+            <h4>AI Resume Assistant</h4>
+            <p>AI tool that improves CVs and matches job descriptions.</p>
+            <a href="https://github.com/44kbulldog">View Project</a>
+        </div>
+
+        <div class="card">
+            <h4>Portfolio Website</h4>
+            <p>My personal developer portfolio hosted on GitHub Pages.</p>
+            <a href="https://44kbulldog.github.io">Live Site</a>
+        </div>
+
+        <div class="card">
+            <h4>Python Projects</h4>
+            <p>Collection of small Python applications.</p>
+            <a href="https://github.com/44kbulldog">GitHub Profile</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>🛠 Skills</h3>
+        <ul>
+            <li>Python</li>
+            <li>JavaScript</li>
+            <li>HTML & CSS</li>
+            <li>Git & GitHub</li>
+            <li>AI Tools & APIs</li>
+        </ul>
+    </div>
+
+    <div class="hire">
+        <h3>💼 Hire Me</h3>
+        <p>I am open to internships, freelance work, and remote developer roles.</p>
+
+        <a class="button" href="mailto:44kbulldog@gmail.com">
+            Contact Me
+        </a>
     </div>
 
 </div>
-
-<script>
-fetch("https://api.github.com/users/44kbulldog/repos")
-.then(response => response.json())
-.then(data => {
-    let output = "";
-
-    data.forEach(repo => {
-        output += `
-            <div class="repo">
-                <h4>${repo.name}</h4>
-                <p>${repo.description || "No description"}</p>
-                <a href="${repo.html_url}" target="_blank">View on GitHub</a>
-            </div>
-        `;
-    });
-
-    document.getElementById("repos").innerHTML = output;
-});
-</script>
 
 </body>
 </html>
