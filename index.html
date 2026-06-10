@@ -9,56 +9,54 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            transition: 0.3s;
-        }
-
-        .dark {
-            background: #0a0f1f;
+            background: #0b1220;
             color: white;
         }
 
-        .light {
-            background: #f4f4f4;
-            color: #111;
-        }
-
         .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px;
         }
 
         .header {
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
         h1 {
-            font-size: 40px;
-            margin-bottom: 5px;
+            font-size: 42px;
+            animation: fadeIn 1s ease-in;
         }
 
         h2 {
             color: #38bdf8;
         }
 
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
         .card {
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            transition: 0.3s;
-        }
-
-        .dark .card {
             background: #111827;
-        }
-
-        .light .card {
-            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .card:hover {
-            transform: scale(1.02);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 120px;
+            background: #1f2937;
+            border-radius: 8px;
+            margin-bottom: 10px;
         }
 
         a {
@@ -67,81 +65,87 @@
         }
 
         .button {
+            display: inline-block;
             padding: 10px 15px;
             background: #38bdf8;
-            border: none;
+            color: black;
             border-radius: 6px;
-            cursor: pointer;
-            margin: 5px;
+            margin-top: 10px;
+            font-weight: bold;
         }
 
         .button:hover {
             background: #0ea5e9;
         }
 
-        .topbar {
-            text-align: center;
-            padding: 10px;
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .section {
+            margin-top: 40px;
         }
     </style>
 </head>
 
-<body class="dark" id="body">
-
-<div class="topbar">
-    <button class="button" onclick="toggleTheme()">Toggle Theme</button>
-</div>
+<body>
 
 <div class="container">
 
     <div class="header">
         <h1>Delon</h1>
         <h2>Software Developer | Python | AI Enthusiast</h2>
-        <p>Building real-world software solutions and AI tools.</p>
+        <p>Building real-world software and AI-powered solutions.</p>
 
         <a class="button" href="https://github.com/44kbulldog" target="_blank">GitHub</a>
         <a class="button" href="resume.pdf" download>Download CV</a>
     </div>
 
-    <div class="card">
-        <h3>🚀 Projects</h3>
-        <ul>
-            <li>AI Resume Assistant</li>
-            <li>Portfolio Website</li>
-            <li>Python Projects Collection</li>
-        </ul>
+    <div class="section">
+        <h2>🚀 Featured Projects</h2>
+
+        <div class="grid">
+
+            <div class="card">
+                <div class="project-img"></div>
+                <h3>AI Resume Assistant</h3>
+                <p>Improves CVs and matches job descriptions using AI logic.</p>
+                <a href="https://github.com/44kbulldog">View Code</a>
+            </div>
+
+            <div class="card">
+                <div class="project-img"></div>
+                <h3>Portfolio Website</h3>
+                <p>Personal developer portfolio hosted on GitHub Pages.</p>
+                <a href="https://44kbulldog.github.io">Live Site</a>
+            </div>
+
+            <div class="card">
+                <div class="project-img"></div>
+                <h3>Python Projects</h3>
+                <p>Collection of beginner and intermediate Python apps.</p>
+                <a href="https://github.com/44kbulldog">GitHub</a>
+            </div>
+
+        </div>
     </div>
 
-    <div class="card">
-        <h3>🛠 Skills</h3>
-        <ul>
-            <li>Python</li>
-            <li>JavaScript</li>
-            <li>HTML & CSS</li>
-            <li>Git & GitHub</li>
-        </ul>
+    <div class="section">
+        <h2>🛠 Skills</h2>
+        <p>Python • JavaScript • HTML • CSS • Git • AI Tools</p>
     </div>
 
-    <div class="card">
-        <h3>💼 Hire Me</h3>
-        <p>Open to internships, freelance, and remote jobs.</p>
+    <div class="section">
+        <h2>💼 Hire Me</h2>
+        <p>I am open to internships, freelance work, and remote opportunities.</p>
+
+        <a class="button" href="mailto:44kbulldog@gmail.com">
+            Contact Me
+        </a>
     </div>
 
 </div>
-
-<script>
-function toggleTheme() {
-    const body = document.getElementById("body");
-
-    if (body.classList.contains("dark")) {
-        body.classList.remove("dark");
-        body.classList.add("light");
-    } else {
-        body.classList.remove("light");
-        body.classList.add("dark");
-    }
-}
-</script>
 
 </body>
 </html>
