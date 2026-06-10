@@ -1,52 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Delon - Software Developer</title>
+    <title>Delon - Software Developer Portfolio</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            transition: 0.3s;
+        }
+
+        .dark {
             background: #0a0f1f;
             color: white;
         }
 
+        .light {
+            background: #f4f4f4;
+            color: #111;
+        }
+
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 40px auto;
             padding: 20px;
         }
 
         .header {
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
         }
 
         h1 {
             font-size: 40px;
             margin-bottom: 5px;
-            animation: fadeIn 1s ease-in;
         }
 
         h2 {
             color: #38bdf8;
-            margin-top: 0;
-        }
-
-        .section {
-            margin-top: 40px;
         }
 
         .card {
-            background: #111827;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 15px;
             margin-bottom: 15px;
-            transition: transform 0.3s;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .dark .card {
+            background: #111827;
+        }
+
+        .light .card {
+            background: white;
         }
 
         .card:hover {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
         a {
@@ -55,99 +67,81 @@
         }
 
         .button {
-            display: inline-block;
-            padding: 12px 18px;
+            padding: 10px 15px;
             background: #38bdf8;
-            color: black;
-            border-radius: 8px;
-            font-weight: bold;
-            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
         }
 
         .button:hover {
             background: #0ea5e9;
         }
 
-        .hire {
+        .topbar {
             text-align: center;
-            padding: 30px;
-            background: #111827;
-            border-radius: 12px;
-            margin-top: 40px;
-        }
-
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-
-        ul {
-            padding-left: 20px;
+            padding: 10px;
         }
     </style>
 </head>
 
-<body>
+<body class="dark" id="body">
+
+<div class="topbar">
+    <button class="button" onclick="toggleTheme()">Toggle Theme</button>
+</div>
 
 <div class="container">
 
     <div class="header">
         <h1>Delon</h1>
         <h2>Software Developer | Python | AI Enthusiast</h2>
-        <p>Building real-world software and AI-powered solutions.</p>
+        <p>Building real-world software solutions and AI tools.</p>
 
-        <a class="button" href="https://github.com/44kbulldog" target="_blank">
-            View GitHub
-        </a>
-
-        <a class="button" href="resume.pdf" download>
-            Download CV
-        </a>
+        <a class="button" href="https://github.com/44kbulldog" target="_blank">GitHub</a>
+        <a class="button" href="resume.pdf" download>Download CV</a>
     </div>
 
-    <div class="section">
+    <div class="card">
         <h3>🚀 Projects</h3>
-
-        <div class="card">
-            <h4>AI Resume Assistant</h4>
-            <p>AI tool that improves CVs and matches job descriptions.</p>
-            <a href="https://github.com/44kbulldog">View Project</a>
-        </div>
-
-        <div class="card">
-            <h4>Portfolio Website</h4>
-            <p>My personal developer portfolio hosted on GitHub Pages.</p>
-            <a href="https://44kbulldog.github.io">Live Site</a>
-        </div>
-
-        <div class="card">
-            <h4>Python Projects</h4>
-            <p>Collection of small Python applications.</p>
-            <a href="https://github.com/44kbulldog">GitHub Profile</a>
-        </div>
+        <ul>
+            <li>AI Resume Assistant</li>
+            <li>Portfolio Website</li>
+            <li>Python Projects Collection</li>
+        </ul>
     </div>
 
-    <div class="section">
+    <div class="card">
         <h3>🛠 Skills</h3>
         <ul>
             <li>Python</li>
             <li>JavaScript</li>
             <li>HTML & CSS</li>
             <li>Git & GitHub</li>
-            <li>AI Tools & APIs</li>
         </ul>
     </div>
 
-    <div class="hire">
+    <div class="card">
         <h3>💼 Hire Me</h3>
-        <p>I am open to internships, freelance work, and remote developer roles.</p>
-
-        <a class="button" href="mailto:44kbulldog@gmail.com">
-            Contact Me
-        </a>
+        <p>Open to internships, freelance, and remote jobs.</p>
     </div>
 
 </div>
+
+<script>
+function toggleTheme() {
+    const body = document.getElementById("body");
+
+    if (body.classList.contains("dark")) {
+        body.classList.remove("dark");
+        body.classList.add("light");
+    } else {
+        body.classList.remove("light");
+        body.classList.add("dark");
+    }
+}
+</script>
 
 </body>
 </html>
