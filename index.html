@@ -1,61 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Delon - Portfolio</title>
+    <title>Delon - Software Developer Portfolio</title>
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
             margin: 0;
-            padding: 0;
+            background: #0f172a;
+            color: #e2e8f0;
         }
 
         .container {
             max-width: 900px;
             margin: 40px auto;
-            background: white;
             padding: 30px;
-            border-radius: 12px;
+            background: #111827;
+            border-radius: 15px;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #334155;
+            margin: 0 auto 15px;
         }
 
         h1 {
-            color: #2c3e50;
-            margin-bottom: 5px;
+            margin: 0;
+            font-size: 32px;
         }
 
         h2 {
-            color: #16a085;
-            margin-top: 0;
+            margin: 5px 0;
+            color: #38bdf8;
+            font-size: 18px;
         }
 
         .section {
             margin-top: 30px;
         }
 
-        .project {
-            background: #ecf0f1;
+        .card {
+            background: #1f2937;
             padding: 15px;
-            border-radius: 8px;
             margin-bottom: 10px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            background: #273449;
         }
 
         a {
-            color: #2980b9;
+            color: #38bdf8;
             text-decoration: none;
         }
 
         .button {
             display: inline-block;
             padding: 10px 15px;
-            background: #16a085;
-            color: white;
+            background: #38bdf8;
+            color: black;
             border-radius: 6px;
             margin-top: 10px;
+            font-weight: bold;
         }
 
         .button:hover {
-            background: #138d75;
+            background: #0ea5e9;
+        }
+
+        ul {
+            padding-left: 20px;
         }
     </style>
 </head>
@@ -64,33 +90,35 @@
 
 <div class="container">
 
-    <h1>Delon</h1>
-    <h2>Aspiring Software Developer | Python | AI Enthusiast</h2>
+    <div class="header">
+        <div class="profile-img"></div>
 
-    <p>
-        I am Delon, a passionate software developer focused on Python, AI,
-        and building real-world solutions. I am actively building projects
-        and preparing for remote tech opportunities.
-    </p>
+        <h1>Delon</h1>
+        <h2>Software Developer | Python | AI Enthusiast</h2>
+
+        <p>
+            Building real-world software solutions with Python, AI, and web technologies.
+        </p>
+    </div>
 
     <div class="section">
         <h3>🚀 Projects</h3>
 
-        <div class="project">
+        <div class="card">
             <h4>AI Resume Assistant</h4>
-            <p>Helps users improve CVs and match job descriptions.</p>
+            <p>AI tool that improves CVs and matches job descriptions.</p>
             <a href="#">View Project</a>
         </div>
 
-        <div class="project">
+        <div class="card">
             <h4>Portfolio Website</h4>
-            <p>This website showcasing my skills and work.</p>
+            <p>This live portfolio hosted on GitHub Pages.</p>
             <a href="https://44kbulldog.github.io">Live Site</a>
         </div>
 
-        <div class="project">
+        <div class="card">
             <h4>Python Projects Collection</h4>
-            <p>Small Python apps and practice projects.</p>
+            <p>Collection of beginner to intermediate Python apps.</p>
             <a href="https://github.com/44kbulldog">GitHub Profile</a>
         </div>
     </div>
@@ -99,16 +127,16 @@
         <h3>🛠 Skills</h3>
         <ul>
             <li>Python</li>
-            <li>Git & GitHub</li>
-            <li>HTML</li>
-            <li>CSS</li>
             <li>JavaScript</li>
+            <li>HTML & CSS</li>
+            <li>Git & GitHub</li>
+            <li>AI Tools & APIs</li>
         </ul>
     </div>
 
     <div class="section">
-        <h3>📩 Hire Me</h3>
-        <p>I am open to internships, freelance work, and remote opportunities.</p>
+        <h3>📩 Contact</h3>
+        <p>Open to internships, freelance work, and remote opportunities.</p>
 
         <a class="button" href="mailto:44kbulldog@gmail.com">
             Contact Me
