@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,46 +6,97 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
         }
 
         h1 {
             color: #2c3e50;
+            margin-bottom: 5px;
         }
 
         h2 {
             color: #16a085;
+            margin-top: 0;
         }
 
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 700px;
+        .section {
+            margin-top: 30px;
+        }
+
+        .project {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            background: #16a085;
+            color: white;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background: #138d75;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Delon</h1>
-        <h2>Aspiring Software Developer</h2>
 
-        <p>
-            I am Delon, passionate about Python, AI, and building real-world software solutions.
-            I am focused on developing my skills and preparing for remote tech opportunities.
-        </p>
+<div class="container">
 
-        <h3>Projects</h3>
-        <ul>
-            <li>AI Resume Assistant</li>
-            <li>Portfolio Website</li>
-            <li>Python Projects Collection</li>
-        </ul>
+    <h1>Delon</h1>
+    <h2>Aspiring Software Developer | Python | AI Enthusiast</h2>
 
-        <h3>Skills</h3>
+    <p>
+        I am Delon, a passionate software developer focused on Python, AI,
+        and building real-world solutions. I am actively building projects
+        and preparing for remote tech opportunities.
+    </p>
+
+    <div class="section">
+        <h3>🚀 Projects</h3>
+
+        <div class="project">
+            <h4>AI Resume Assistant</h4>
+            <p>Helps users improve CVs and match job descriptions.</p>
+            <a href="#">View Project</a>
+        </div>
+
+        <div class="project">
+            <h4>Portfolio Website</h4>
+            <p>This website showcasing my skills and work.</p>
+            <a href="https://44kbulldog.github.io">Live Site</a>
+        </div>
+
+        <div class="project">
+            <h4>Python Projects Collection</h4>
+            <p>Small Python apps and practice projects.</p>
+            <a href="https://github.com/44kbulldog">GitHub Profile</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>🛠 Skills</h3>
         <ul>
             <li>Python</li>
             <li>Git & GitHub</li>
@@ -54,9 +104,18 @@
             <li>CSS</li>
             <li>JavaScript</li>
         </ul>
-
-        <h3>Contact</h3>
-        <p>GitHub: 44kbulldog</p>
     </div>
+
+    <div class="section">
+        <h3>📩 Hire Me</h3>
+        <p>I am open to internships, freelance work, and remote opportunities.</p>
+
+        <a class="button" href="mailto:444kbulldog@gmail.com">
+            Contact Me
+        </a>
+    </div>
+
+</div>
+
 </body>
 </html>
