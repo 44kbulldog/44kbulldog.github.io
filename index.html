@@ -1,162 +1,610 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Delon - Software Developer Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Delon Muriungi — Geospatial & AI Developer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Delon Muriungi — Geospatial analysis, QGIS, and AI-powered software for real-world problems, based in Kenya.">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0b1220;
-            color: white;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            padding: 30px;
-        }
+<style>
+  :root{
+    --bg:        #0a1410;
+    --bg-soft:   #0f1d17;
+    --panel:     #11211a;
+    --panel-line:#1c3327;
+    --ink:       #eef6f0;
+    --ink-dim:   #a9beb2;
+    --ink-faint: #5d756a;
+    --accent:    #8ee6a0;   /* vegetation green */
+    --accent-soft: rgba(142,230,160,0.12);
+    --soil:      #e3a85a;   /* survey amber */
+    --line:      #1d3a2c;
+    --radius:    14px;
+    --transition-theme: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+  }
 
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-        }
+  [data-theme="light"]{
+    --bg:        #f4f3ee;
+    --bg-soft:   #ebe9e2;
+    --panel:     #ffffff;
+    --panel-line:#e0ddd3;
+    --ink:       #16201a;
+    --ink-dim:   #4c5950;
+    --ink-faint: #8a958c;
+    --accent:    #2f8f54;
+    --accent-soft: rgba(47,143,84,0.1);
+    --soil:      #b3781f;
+    --line:      #e3e0d6;
+  }
 
-        h1 {
-            font-size: 42px;
-        }
+  *{ box-sizing:border-box; }
 
-        h2 {
-            color: #38bdf8;
-        }
+  html{ scroll-behavior:smooth; }
 
-        .section {
-            margin-top: 40px;
-        }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    transition:var(--transition-theme);
+  }
+  .project, .pill, .contact-card, .coord-readout, .section-title .tag, .button.ghost{
+    transition:var(--transition-theme), transform 0.2s ease, box-shadow 0.2s ease;
+  }
 
-        .project {
-            background: #111827;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
 
-        .img {
-            width: 250px;
-            height: 150px;
-            background: #1f2937;
-            border-radius: 10px;
-        }
+  a{ color:var(--accent); text-decoration:none; }
 
-        .content {
-            flex: 1;
-            min-width: 250px;
-        }
+  ::selection{ background:var(--accent); color:#06140c; }
 
-        a {
-            color: #38bdf8;
-            text-decoration: none;
-        }
+  .container{
+    max-width:980px;
+    margin:auto;
+    padding:0 28px;
+    position:relative;
+  }
 
-        .button {
-            display: inline-block;
-            padding: 10px 15px;
-            background: #38bdf8;
-            color: black;
-            border-radius: 6px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
+  /* ---------- topo background ---------- */
+  .topo-field{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    overflow:hidden;
+    pointer-events:none;
+  }
+  .topo-field svg{
+    position:absolute;
+    top:50%; left:50%;
+    width:1400px;
+    transform:translate(-50%,-50%);
+    opacity:0.55;
+  }
+  .topo-field path{
+    fill:none;
+    stroke:var(--line);
+    stroke-width:1;
+  }
+  .topo-field path.alt{ stroke:var(--panel-line); }
 
-        .button:hover {
-            background: #0ea5e9;
-        }
+  /* ---------- header / hero ---------- */
+  .hero{
+    position:relative;
+    padding:96px 0 70px;
+    border-bottom:1px solid var(--line);
+  }
 
-        .skills {
-            background: #111827;
-            padding: 15px;
-            border-radius: 10px;
-        }
-    </style>
+  .coord-readout{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.06em;
+    color:var(--accent);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 12px;
+    border:1px solid var(--line);
+    border-radius:100px;
+    background:var(--panel);
+    margin-bottom:28px;
+    opacity:0;
+    animation:fadeUp 0.7s ease forwards;
+    animation-delay:0.1s;
+  }
+  .coord-readout .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 0 rgba(142,230,160,0.6);
+    animation:pulse 2.4s infinite;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 18px;
+    opacity:0;
+    animation:fadeUp 0.7s ease forwards;
+    animation-delay:0.18s;
+  }
+
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(40px, 6vw, 64px);
+    font-weight:700;
+    line-height:1.04;
+    margin:0 0 18px;
+    letter-spacing:-0.01em;
+    opacity:0;
+    animation:fadeUp 0.7s ease forwards;
+    animation-delay:0.26s;
+  }
+  h1 .accent{ color:var(--accent); }
+
+  .lede{
+    font-size:18px;
+    line-height:1.6;
+    color:var(--ink-dim);
+    max-width:560px;
+    margin:0 0 36px;
+    opacity:0;
+    animation:fadeUp 0.7s ease forwards;
+    animation-delay:0.34s;
+  }
+
+  .hero-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    opacity:0;
+    animation:fadeUp 0.7s ease forwards;
+    animation-delay:0.42s;
+  }
+
+  .button{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 22px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:14.5px;
+    transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+  .button.primary{
+    background:var(--accent);
+    color:#06140c;
+  }
+  .button.primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px -8px rgba(142,230,160,0.5);
+  }
+  .button.ghost{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--ink);
+  }
+  .button.ghost:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+    transform:translateY(-2px);
+  }
+
+  /* ---------- theme toggle ---------- */
+  .theme-toggle{
+    position:fixed;
+    top:22px;
+    right:24px;
+    z-index:10;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:var(--transition-theme), transform 0.2s ease;
+  }
+  .theme-toggle:hover{
+    border-color:var(--accent);
+    transform:translateY(-2px) rotate(8deg);
+  }
+  .theme-toggle svg{ width:18px; height:18px; }
+  .theme-toggle .sun{ display:none; }
+  [data-theme="light"] .theme-toggle .moon{ display:none; }
+  [data-theme="light"] .theme-toggle .sun{ display:block; }
+
+  /* ---------- sections ---------- */
+  .section{
+    padding:74px 0;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .section:last-of-type{ border-bottom:none; }
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:34px;
+    flex-wrap:wrap;
+  }
+
+  .section-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:28px;
+    font-weight:600;
+    margin:0;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .section-title .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--accent);
+    border:1px solid var(--panel-line);
+    background:var(--panel);
+    padding:4px 9px;
+    border-radius:6px;
+    letter-spacing:0.04em;
+  }
+
+  .section-note{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-faint);
+  }
+
+  /* reveal on scroll */
+  .reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- project cards ---------- */
+  .project{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:var(--radius);
+    margin-bottom:18px;
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    padding:22px;
+    position:relative;
+    overflow:hidden;
+    transition:transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .project::before{
+    content:"";
+    position:absolute;
+    left:0; top:0; bottom:0;
+    width:3px;
+    background:var(--accent);
+    transform:scaleY(0);
+    transition:transform 0.3s ease;
+    transform-origin:top;
+  }
+  .project:hover{
+    transform:translateY(-4px);
+    border-color:var(--panel-line);
+    box-shadow:0 18px 34px -22px rgba(0,0,0,0.6);
+  }
+  .project:hover::before{ transform:scaleY(1); }
+
+  .img{
+    width:240px;
+    height:150px;
+    flex-shrink:0;
+    border-radius:10px;
+    background:
+      linear-gradient(135deg, var(--bg-soft) 0%, var(--panel) 100%);
+    border:1px solid var(--panel-line);
+    position:relative;
+    overflow:hidden;
+  }
+  .img img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform 0.4s ease;
+  }
+  .project:hover .img img{ transform:scale(1.06); }
+  .img.map::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 18px, rgba(142,230,160,0.08) 18px 19px),
+      repeating-linear-gradient(90deg, transparent 0 18px, rgba(142,230,160,0.08) 18px 19px);
+  }
+  /* shown only when no image is loaded for that slot */
+  .img .placeholder-label{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    color:var(--ink-faint);
+    z-index:1;
+  }
+  .img.has-image .placeholder-label{ display:none; }
+
+  .content{ flex:1; min-width:240px; }
+
+  .project h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:19px;
+    margin:0 0 8px;
+  }
+  .project p{
+    color:var(--ink-dim);
+    line-height:1.6;
+    margin:0 0 12px;
+    font-size:15px;
+  }
+  .tech{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--soil);
+    margin-bottom:12px;
+    letter-spacing:0.02em;
+  }
+  .project a.link{
+    font-weight:600;
+    font-size:14px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .project a.link svg{ transition:transform 0.18s ease; width:13px; height:13px; }
+  .project a.link:hover svg{ transform:translate(3px,-3px); }
+
+  /* ---------- skills ---------- */
+  .skills-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .pill{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--ink);
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    padding:9px 14px;
+    border-radius:8px;
+    transition:border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  .pill:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+    transform:translateY(-2px);
+  }
+
+  /* ---------- contact ---------- */
+  .contact-card{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:var(--radius);
+    padding:40px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .contact-card h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:26px;
+    margin:0 0 10px;
+  }
+  .contact-card p{
+    color:var(--ink-dim);
+    margin:0 0 24px;
+    font-size:15.5px;
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 0 50px;
+    color:var(--ink-faint);
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+  }
+
+  @keyframes fadeUp{
+    to{ opacity:1; transform:none; }
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(142,230,160,0.55); }
+    70%{ box-shadow:0 0 0 8px rgba(142,230,160,0); }
+    100%{ box-shadow:0 0 0 0 rgba(142,230,160,0); }
+  }
+
+  @media (max-width:600px){
+    .hero{ padding:70px 0 50px; }
+    .section{ padding:54px 0; }
+    .img{ width:100%; height:140px; }
+  }
+</style>
 </head>
-
 <body>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">
+  <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+</button>
+
+<div class="topo-field" aria-hidden="true">
+  <svg viewBox="0 0 1400 700" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,520 C150,470 250,560 400,500 C550,440 650,520 800,480 C950,440 1050,500 1200,460 C1300,440 1380,460 1400,450" />
+    <path class="alt" d="M0,560 C160,510 260,600 420,540 C580,480 680,560 830,520 C980,480 1080,540 1230,500 C1320,480 1380,490 1400,485" />
+    <path d="M0,460 C140,410 240,500 390,440 C540,380 640,460 790,420 C940,380 1040,440 1190,400 C1290,380 1370,395 1400,390" />
+    <path class="alt" d="M0,610 C170,560 270,650 430,590 C600,530 700,610 850,570 C1000,530 1100,590 1250,550 C1330,530 1380,545 1400,540" />
+    <path d="M0,400 C130,355 230,440 380,385 C530,330 630,405 780,370 C930,330 1030,390 1180,350 C1280,330 1360,345 1400,340" />
+  </svg>
+</div>
 
 <div class="container">
 
-    <div class="header">
-        <h1>Delon</h1>
-        <h2>Software Developer | Python | AI Enthusiast</h2>
-        <p>Building real-world software and AI-powered solutions.</p>
+  <header class="hero">
+    <div class="coord-readout"><span class="dot"></span>-0.2833° S, 36.0667° E · NAIROBI, KE</div>
+    <p class="eyebrow">Field notes from a software developer</p>
+    <h1>Delon Muriungi<br><span class="accent">maps problems</span>, then solves them.</h1>
+    <p class="lede">I build geospatial tools and AI-powered software, end-to-end — from raw satellite imagery to working applications people actually use. Python, QGIS, and a habit of shipping.</p>
+    <div class="hero-actions">
+      <a class="button primary" href="https://github.com/44kbulldog" target="_blank" rel="noopener">View GitHub</a>
+      <a class="button ghost" href="resume.pdf" download>Download CV</a>
+      <a class="button ghost" href="mailto:44kbulldog@gmail.com">Get in touch</a>
+    </div>
+  </header>
 
-        <a class="button" href="https://github.com/44kbulldog" target="_blank">GitHub</a>
-        <a class="button" href="resume.pdf" download>Download CV</a>
+  <section class="section">
+    <div class="section-head reveal">
+      <h2 class="section-title">Case studies <span class="tag">03 LOGGED</span></h2>
+      <span class="section-note">selected work, 2024 — present</span>
     </div>
 
-    <div class="section">
-        <h2>🚀 Featured Projects (Case Studies)</h2>
-
-        <div class="project">
-            <div class="img"></div>
-            <div class="content">
-                <h3>AI Resume Assistant</h3>
-                <p>
-                    Built a tool that analyzes CVs and matches them with job descriptions
-                    using Python logic and AI techniques.
-                </p>
-                <p><b>Tech:</b> Python</p>
-                <a href="https://github.com/44kbulldog">View Code</a>
-            </div>
-        </div>
-
-        <div class="project">
-            <div class="img"></div>
-            <div class="content">
-                <h3>Portfolio Website</h3>
-                <p>
-                    Fully responsive developer portfolio hosted on GitHub Pages.
-                    Designed to showcase skills and projects.
-                </p>
-                <p><b>Tech:</b> HTML, CSS, JavaScript</p>
-                <a href="https://44kbulldog.github.io">Live Demo</a>
-            </div>
-        </div>
-
-        <div class="project">
-            <img src="images/your-image-name.png" width="250" height="150" style="border-radius:10px;">
-            <div class="content">
-                <h3>Python Projects Collection</h3>
-                <p>
-                    A set of beginner-to-intermediate Python applications built during learning.
-                </p>
-                <p><b>Tech:</b> Python</p>
-                <a href="https://github.com/44kbulldog">GitHub</a>
-            </div>
-        </div>
-
+    <div class="project reveal">
+      <div class="img map">
+        <img src="images/ai-resume-assistant.png" alt="AI Resume Assistant screenshot" onerror="this.style.display='none'">
+        <span class="placeholder-label">drop a screenshot at<br>images/ai-resume-assistant.png</span>
+      </div>
+      <div class="content">
+        <h3>AI Resume Assistant</h3>
+        <p>A tool that reads a CV and a job description side by side, then scores the match and flags missing keywords — built to cut through application noise.</p>
+        <div class="tech">PYTHON</div>
+        <a class="link" href="https://github.com/44kbulldog" target="_blank" rel="noopener">View code <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+      </div>
     </div>
 
-    <div class="section">
-        <h2>🛠 Skills</h2>
-        <div class="skills">
-            Python • JavaScript • HTML • CSS • Git • GitHub • AI Tools
-        </div>
+    <div class="project reveal">
+      <div class="img map">
+        <img src="images/portfolio-site.png" alt="Portfolio website screenshot" onerror="this.style.display='none'">
+        <span class="placeholder-label">drop a screenshot at<br>images/portfolio-site.png</span>
+      </div>
+      <div class="content">
+        <h3>Portfolio Website</h3>
+        <p>This site — a fully responsive developer portfolio built from scratch and hosted on GitHub Pages, designed to read clearly on any device.</p>
+        <div class="tech">HTML · CSS · JAVASCRIPT</div>
+        <a class="link" href="https://44kbulldog.github.io" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+      </div>
     </div>
 
-    <div class="section">
-        <h2>💼 Hire Me</h2>
-        <p>I am open to internships, freelance work, and remote opportunities.</p>
-
-        <a class="button" href="mailto:44kbulldog@gmail.com">
-            Contact Me
-        </a>
+    <div class="project reveal">
+      <div class="img map">
+        <img src="images/your-image-name.png" alt="Python projects collection" onerror="this.style.display='none'">
+        <span class="placeholder-label">drop a screenshot at<br>images/your-image-name.png</span>
+      </div>
+      <div class="content">
+        <h3>Python Projects Collection</h3>
+        <p>A growing set of beginner-to-intermediate applications built while learning the language — small, focused, and shipped rather than left half-finished.</p>
+        <div class="tech">PYTHON</div>
+        <a class="link" href="https://github.com/44kbulldog" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+      </div>
     </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head reveal">
+      <h2 class="section-title">Toolkit <span class="tag">STACK</span></h2>
+    </div>
+    <div class="skills-grid reveal">
+      <span class="pill">Python</span>
+      <span class="pill">JavaScript</span>
+      <span class="pill">HTML / CSS</span>
+      <span class="pill">QGIS</span>
+      <span class="pill">Git & GitHub</span>
+      <span class="pill">AI / LLM Tools</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="contact-card reveal">
+      <h2>Open to work</h2>
+      <p>Internships, freelance contracts, and remote opportunities — geospatial or AI-leaning preferred, but I like a good problem regardless.</p>
+      <a class="button primary" href="mailto:44kbulldog@gmail.com">Contact me</a>
+    </div>
+  </section>
 
 </div>
+
+<footer>Built by Delon Muriungi · Nairobi, Kenya</footer>
+
+<script>
+  // Theme toggle (persisted via in-memory + localStorage where available)
+  const root = document.documentElement;
+  const toggleBtn = document.getElementById('themeToggle');
+  function applyTheme(theme){
+    root.setAttribute('data-theme', theme);
+    try{ localStorage.setItem('portfolio-theme', theme); }catch(e){}
+  }
+  let saved = null;
+  try{ saved = localStorage.getItem('portfolio-theme'); }catch(e){}
+  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  applyTheme(saved || (prefersLight ? 'light' : 'dark'));
+  toggleBtn.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+  });
+
+  // Mark image slots that successfully loaded a real screenshot
+  document.querySelectorAll('.img img').forEach(img => {
+    img.addEventListener('load', () => {
+      if (img.naturalWidth > 0) img.closest('.img').classList.add('has-image');
+    });
+    if (img.complete && img.naturalWidth > 0) img.closest('.img').classList.add('has-image');
+  });
+
+  // Scroll-triggered reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Gentle parallax drift on the topo background
+  const topo = document.querySelector('.topo-field svg');
+  if (topo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    let t = 0;
+    function drift(){
+      t += 0.0015;
+      const x = Math.sin(t) * 12;
+      const y = Math.cos(t * 0.8) * 8;
+      topo.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+      requestAnimationFrame(drift);
+    }
+    drift();
+  }
+</script>
 
 </body>
 </html>
